@@ -1,6 +1,5 @@
 package com.zootycoon.animal.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,6 +37,19 @@ public class AnimalController {
 
 		return ResponseEntity.ok().body(responseDTO);
 	}
+	
+
+	@GetMapping("/allAlive")
+	public ResponseEntity<?> getAllAliveAnimalList() {
+
+		List<AnimalVO> animalVOList = animalService.getAllAliveAnimalList();
+		List<AnimalDTO> animalDTOLIst = dtoMapper.toAnimalDTO(animalVOList);
+
+		ResponseDTO<AnimalDTO> responseDTO = ResponseDTO.<AnimalDTO>builder().data(animalDTOLIst).build();
+
+		return ResponseEntity.ok().body(responseDTO);
+	}
+
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<?> getAnimal(@PathVariable String id) {
@@ -61,6 +74,19 @@ public class AnimalController {
 
 		return ResponseEntity.ok().body(responseDTO);
 
+	}
+	
+	@PutMapping
+	public ResponseEntity<?> updateAnimal(@RequestBody AnimalDTO animalDTO){
+		AnimalVO animalVO = dtoMapper.toAnimalVO(animalDTO);
+		
+		List<AnimalVO> animalVOList = animalService.updateAnimal(animalVO);
+		List<AnimalDTO> animalDTOLIst = dtoMapper.toAnimalDTO(animalVOList);
+
+		ResponseDTO<AnimalDTO> responseDTO = ResponseDTO.<AnimalDTO>builder().data(animalDTOLIst).build();
+
+		return ResponseEntity.ok().body(responseDTO);
+		
 	}
 
 }
