@@ -48,4 +48,14 @@ public class AnimalService {
 		return animalVOes;
 	}
 
+	public List<AnimalVO> createAnimal(AnimalVO animalVO) {
+		AnimalEntity animalEntity = voMapper.toAnimalEntity(animalVO);
+		AnimalEntity ret = animalRepository.save(animalEntity);
+		
+		List<AnimalEntity> animalEntities = new ArrayList<>();
+		animalEntities.add(ret);
+		List<AnimalVO> animalVOes = voMapper.toAnimalVO(animalEntities);
+		return animalVOes;
+	}
+
 }

@@ -12,4 +12,6 @@ public interface DTOMapper {
 
 	List<AnimalDTO> toAnimalDTO(List<AnimalVO> animalVOList);
 
+	AnimalVO toAnimalVO(AnimalDTO animalDTO);
+
 }

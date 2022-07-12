@@ -12,4 +12,6 @@ public interface VOMapper {
 
 	List<AnimalVO> toAnimalVO(List<AnimalEntity> animalEntities);
 
+	AnimalEntity toAnimalEntity(AnimalVO animalVO);
+
 }
