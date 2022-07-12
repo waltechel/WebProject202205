@@ -60,4 +60,12 @@ public class AnimalService {
 		return voMapper.toAnimalVO(animalEntities);
 	}
 
+	public void deleteAnimalByName(String name) {
+		List<AnimalEntity> animalEntities = animalRepository.findAll();
+		for (AnimalEntity animalEntity : animalEntities) {
+			if (name.equals(animalEntity.getName()))
+				animalRepository.deleteById(animalEntity.getId());
+		}
+	}
+
 }
